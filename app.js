@@ -7,6 +7,7 @@ const friendsInput = document.getElementById("amigo");
 const friendsList = document.getElementById("listaAmigos");
 
 const sortResult = document.getElementById('resultado');
+const sortButton = document.querySelector('.button-draw');
 
 // Defining base array to store all friends' names
 let friends = [];
@@ -25,20 +26,36 @@ function addFriends(){ //This function will add a new friend anytime the user wa
     // Append new name
     friends.push(friendName);
 
-    // Adding new element to the UI using DOM
-    const listItems = document.createElement("li");
-    listItems.textContent = friendName;
-
-    friendsList.appendChild(listItems);
+    // Updating element to the UI using DOM
+    updateFriends();
 
     // Restore | clean name field
     friendsInput.value = "";
 }
 
 function updateFriends(){
-    // Code logic to be defined
+    // Get specific element from list
+    const currentFriends = document.getElementById('listaAmigos');
+    
+    // Clean-up list before adding new elements
+    currentFriends.innerHTML = "";
 
+    // Iterate over current array and add each new name as <li>
+    for (let i = 0; i < friends.length; i++) {
+        // TODO: Add functionality to check if name exists and update it
+        const friend = friends[i];
+
+        // Create new element in list
+        const listItems = document.createElement("li");
+
+        // Establecer el texto del <li> con el nombre del amigo
+        listItems.textContent = friend;
+
+        // Agregar el <li> a la lista HTML
+        currentFriends.appendChild(listItems);
+    }
 }
+
 
 function sortFriends(){
     // Check if there are enough friends
@@ -58,3 +75,7 @@ function sortFriends(){
     // TODO: Implement functionality to choose player (anybody shouldn't choose themselves)
 
 }
+
+// Adding listeners to the buttons to call functions
+//addButton.addEventListener("click", addFriends);
+//sortButton.addEventListener("click", sortFriends);
